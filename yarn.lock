@@ -575,10 +575,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@microkits/microinjection@^1.0.0":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@microkits/microinjection/-/microinjection-1.0.3.tgz#2f7650cfb9f41001006ecd252bede7719f0d8e76"
-  integrity sha512-ud5BBvcV+t+9DloPu1PN3temi4yjn3uIayr/5NUF0pJdmfDBxriraWWDq5vrtFcpoxcMLUtvOl+hl9YU0qT4xg==
+"@microkits/microinjection@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@microkits/microinjection/-/microinjection-2.0.0.tgz#8f17455260db730eee1798035169ecf513cb6eb8"
+  integrity sha512-YYehdXQotbh5uWADmfAf0izjdqcqSQmrAmIbBKMoMH5GLcsU8bhn2613z+qUSXMmLHgN/GQek9cfcsyZOi2ruw==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
