@@ -19,7 +19,7 @@ export class DecoratorsModule extends AbstractModule {
       if (fs.statSync(directory + "/" + file).isDirectory()) {
         files = this.getFiles(directory + "/" + file, files)
       } else {
-        files.push(path.join(__dirname, directory, "/", file))
+        files.push(path.join(process.cwd(), directory, "/", file))
       }
     });
 
