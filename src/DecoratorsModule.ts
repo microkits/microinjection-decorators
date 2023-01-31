@@ -12,10 +12,22 @@ export class DecoratorsModule extends AbstractModule {
     this.path = options.path;
   }
 
+  private getFiles = (directory: string, files?: string[]) => {
+    files = files || []
+
+    fs.readdirSync(directory).forEach((file) => {
+      if (fs.statSync(directory + "/" + file).isDirectory()) {
+        files = this.getFiles(directory + "/" + file, files)
+      } else {
+        files.push(path.join(__dirname, directory, "/", file))
+      }
+    });
+
+    return files;
+  }
+
   async configure(container: Container): Promise<void> {
-    const files = fs
-      .readdirSync(this.path)
-      .map(file => path.join(process.cwd(), this.path, file));
+    const files = this.getFiles(this.path);
 
     for (const file of files) {
       if (file.endsWith(".ts") || file.endsWith(".js")) {
@@ -26,17 +38,14 @@ export class DecoratorsModule extends AbstractModule {
 
           if (target instanceof Function) {
             if (MetadataRegistry.has(target)) {
-              container
-                .register(
-                  MetadataRegistry.getId(target)
-                )
-                .asClass(target, {
-                  properties: MetadataRegistry.getProperties(target),
-                  dependencies: MetadataRegistry.getDependencies(target)
-                })
-                .inScope(
-                  MetadataRegistry.getScope(target)
-                );
+              container.register(
+                MetadataRegistry.getId(target)
+              ).asClass(target, {
+                properties: MetadataRegistry.getProperties(target),
+                dependencies: MetadataRegistry.getDependencies(target)
+              }).inScope(
+                MetadataRegistry.getScope(target)
+              );
             }
           }
         }
