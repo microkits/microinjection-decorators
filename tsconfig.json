@@ -1,16 +1,13 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "module": "commonjs",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "declaration": true,
-    "noImplicitAny": false,
-    "removeComments": true,
-    "noLib": false,
-    "target": "es2019",
     "experimentalDecorators": true,
-    "sourceMap": true
+    "removeComments": true,
+    "target": "es2021",
+    "sourceMap": true,
+    "declaration": true
   }
 }
