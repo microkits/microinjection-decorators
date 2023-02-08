@@ -19,7 +19,7 @@ export class DecoratorsModule extends AbstractModule {
       if (fs.statSync(directory + "/" + file).isDirectory()) {
         files = this.getFiles(directory + "/" + file, files)
       } else {
-        files.push(path.join(directory, directory, "/", file))
+        files.push(path.join(directory, "/", file))
       }
     });
 
@@ -29,24 +29,32 @@ export class DecoratorsModule extends AbstractModule {
   async configure(container: Container): Promise<void> {
     const files = this.getFiles(this.path);
 
-    for (const file of files) {
-      if ((file.endsWith(".ts") || file.endsWith(".js"))) {
-        const module = await import(file);
+    for (const filename of files) {
+      if (
+        !filename.match(/\.[jt]s$/) ||
+        filename.endsWith('.js.map') ||
+        filename.endsWith('.d.ts') ||
+        filename.startsWith('.') ||
+        filename.match(/index\.[jt]s$/)
+      ) {
+        continue;
+      }
 
-        for (const key in module) {
-          const target = module[key];
+      const module = await import(filename);
 
-          if (target instanceof Function) {
-            if (MetadataRegistry.has(target)) {
-              container.register(
-                MetadataRegistry.getId(target)
-              ).asClass(target, {
-                properties: MetadataRegistry.getProperties(target),
-                dependencies: MetadataRegistry.getDependencies(target)
-              }).inScope(
-                MetadataRegistry.getScope(target)
-              );
-            }
+      for (const key in module) {
+        const target = module[key];
+
+        if (target instanceof Function) {
+          if (MetadataRegistry.has(target)) {
+            container.register(
+              MetadataRegistry.getId(target)
+            ).asClass(target, {
+              properties: MetadataRegistry.getProperties(target),
+              dependencies: MetadataRegistry.getDependencies(target)
+            }).inScope(
+              MetadataRegistry.getScope(target)
+            );
           }
         }
       }
