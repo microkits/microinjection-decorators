@@ -19,7 +19,7 @@ export class DecoratorsModule extends AbstractModule {
       if (fs.statSync(directory + "/" + file).isDirectory()) {
         files = this.getFiles(directory + "/" + file, files)
       } else {
-        files.push(path.join(process.cwd(), directory, "/", file))
+        files.push(path.join(directory, directory, "/", file))
       }
     });
 
@@ -30,7 +30,7 @@ export class DecoratorsModule extends AbstractModule {
     const files = this.getFiles(this.path);
 
     for (const file of files) {
-      if (file.endsWith(".ts") || file.endsWith(".js")) {
+      if ((file.endsWith(".ts") || file.endsWith(".js"))) {
         const module = await import(file);
 
         for (const key in module) {
