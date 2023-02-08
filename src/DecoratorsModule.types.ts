@@ -1,3 +1,3 @@
 export interface DecoratorsModuleOptions {
-  path: string;
+  path?: string;
 }

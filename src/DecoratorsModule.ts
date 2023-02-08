@@ -7,9 +7,9 @@ import path from "path";
 export class DecoratorsModule extends AbstractModule {
   private readonly path: string;
 
-  constructor(options: DecoratorsModuleOptions) {
+  constructor(options?: DecoratorsModuleOptions) {
     super()
-    this.path = options.path;
+    this.path = options?.path ?? __dirname;
   }
 
   private getFiles = (directory: string, files?: string[]) => {
