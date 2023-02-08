@@ -14,7 +14,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc --build tsconfig.build.json",
+    "prepublish": "yarn build",
+    "build": "tsc",
     "test": "jest --color",
     "lint": "eslint src --ext .ts"
   },
