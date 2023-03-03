@@ -129,6 +129,7 @@ export abstract class MetadataRegistry {
    * @returns A boolean value.
    */
   static has<T>(target: AnyClass<T>): boolean {
-    return this.metadata.has(target);
+    const id = this.getId(target);
+    return id != null;
   }
 }
