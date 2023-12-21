@@ -18,7 +18,9 @@ export class DecoratorsModule extends AbstractModule {
     ];
     this.exclude = options?.exclude ?? [
       "**/*.spec.ts",
+      "**/*.spec.js",
       "**/*.test.ts",
+      "**/*.test.js",
       "**/*.js.map",
       "**/*.d.ts",
       "**/.*",
