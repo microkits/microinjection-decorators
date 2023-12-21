@@ -1,6 +1,6 @@
 {
   "name": "@microkits/microinjection-decorators",
-  "version": "0.5.0",
+  "version": "0.6.1",
   "description": "Brings decorators to @microkits/microinjection",
   "author": {
     "name": "Guilherme Covre Dalleprane",
